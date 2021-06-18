@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Dashboard</title>
+
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0/css/bootstrap.min.css" />
+
+    <!-- link for icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" crossorigin="anonymous" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <!-- TITLE -->
+    <nav class="navbar text-white">
+        <h1>Weather Dashboard</h1>
+    </nav>
+
+    <!-- MAIN PAGE -->
+    <main class="container-fluid">
+        <!-- CITY AND WEATHER CONTAINER -->
+        <div class="row">
+            <!-- SEARCH USER INPUT & DISPLAY CITY LIST -->
+            <div class="col-3 sidenav bg-light">
+                <!-- user input; search button; city history list -->
+                <form>
+                    <label id="search-label">Search for a city:</label>
+                    <!-- user input -->
+                    <input type="text" id="city-input" placeholder="enter city name" />
+                    <!-- search button -->
+                    <button i class="fas fa-search" id="search-button"></button i>
+                    <!-- city history list -->
+                    <ul id="city-list" class="list-unstyled">
+                        <!-- create li tags displaying cities searched -->
+                    </ul>
+                </form>
+            </div>
+                
+            <!-- CURRENT WEATHER & 5 DAY FORECAST -->
+            <div class="col-9" id="empty">
+                <!-- current weather -->
+                <div class="row">
+                    <div id="current-weather"></div>
+                </div>
+
+                <!-- 5day forecast-->
+                <div class="row">
+                    <div id="5day-forecast">
+                        <div id="day7"></div>
+                        <div id="day15"></div>
+                        <div id="day23"></div>
+                        <div id="day31"></div>
+                        <div id="day39"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        
+    <!-- JS -->
+    <script src="script.js"></script>
+</body>
+</html>
