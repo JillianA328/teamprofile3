@@ -8,53 +8,49 @@ const fs = require("fs");
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer");
+const render = require("./src/htmlRenderer");
 
-
-
+const team = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 const promptUser = () => {
     inquirer.prompt([
 
+        //Manager info
         {
             type: 'input',
-            name: 'name',
+            name: 'managerName',
             message: 'Please enter your name:',
 
         },
 
         {
             type: 'input',
-            name: 'id',
+            name: 'managerId',
             message: 'Please enter your employee ID:',
         },
 
         {
             type: 'input',
-            name: 'email',
+            name: 'managerEmail',
             message: 'Please enter your email address:',
         },
 
         {
             type: 'input',
-            name: 'office',
+            name: 'managerOffice',
             message: 'Please enter your office number:',
-        },
-
-        {
-            type: 'list',
-            choices: ["Manager", "Engineer", "Intern"],
-            message: 'Please select your role:',
-            name: 'role'
         }
 
     ]).then(response => {
-        const manager = new Manager9response.managerName, response.managerId, 
-        response.managerEmail, response.officeNumber team.push(manager);
+        const manager = new Manager(response.managerName, response.managerId,
+            response.managerEmail, response.managerOffice);
 
-        buildTeam();
+            team.push(manager);
+
+
+        teamBuild();
 
     });
 };
@@ -64,24 +60,114 @@ var teamBuild = function () {
     inquirer.prompt([
         {
             type: 'list',
-            message: 'Select a team member:'
+            message: 'Select a team member:',
             choices: ['Engineer', 'Intern', 'None'],
             name: 'team',
         }
     ])
-    .then(response => {
-        console.log(team);
-        if (response.team === 'Enineer') {
-            engineerInfo();
-        } else if
-        (response.team === 'Intern') {
-            internInfo();
-        } else {
-            fs.createReadStream();
-        }
+        .then(response => {
+            console.log(team);
+            if (response.team === 'Engineer') {
+                engineerInfo();
+            } else if
+                (response.team === 'Intern') {
+                internInfo();
+            } else {
+                // fs.createReadStream();
+                createTeam();
+            }
         });
 };
 
+//intern information
+var internInfo = function () {
+    console.log("intern");
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'Interns name:',
+            name: 'internName',
+        },
+
+        {
+            type: 'input',
+            message: 'Interns ID:',
+            name: 'internId',
+        },
+
+        {
+            type: 'input',
+            message: 'Interns email:',
+            name: 'internEmail',
+        },
+
+        {
+            type: 'input',
+            message: 'Interns school:',
+            name: 'internSchool',
+        }
+    ])
+        .then(response => {
+            const intern = new Intern(response.interName.response.internID,
+                response.internEmail, response.internSchool);
+            team.push(intern);
+
+            teamBuild();
+        });
+};
+
+
+//Engineer Info
+var engineerInfo = function () {
+    console.log("engineer");
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'Engineers name:',
+            name: 'engineerName',
+        },
+
+        {
+            type: 'input',
+            message: 'Engineers ID:',
+            name: 'engineerId',
+        },
+
+        {
+            type: 'input',
+            message: 'Engineers email:',
+            name: 'engineerEmail',
+        },
+
+        {
+            type: 'input',
+            message: 'Engineers school:',
+            name: 'engineerSchool',
+        }
+    ])
+        .then(response => {
+            const engineer = new Engineer(response.engineerName.response.engineerID,
+                response.engineerEmail, response.engineerSchool);
+            team.push(engineer);
+
+            teamBuild();
+        });
+};
+
+
+//html file create
+var createTeam = function () {
+
+    fs.writeFile( __dirname + '/output/team.html', render(team), function (err) {
+        if (err) {
+            return console.error(err);
+        }
+        console.log("Team has been created");
+    })
+}
+    
+
+promptUser();
 
 
 // After the user has input all employees desired, call the `render` function (required
